@@ -1,0 +1,26 @@
+section	.text
+	global _start       ;must be declared for using gcc
+_start:            
+    mov eax, 'a' ; Inicializamos eax en 'a'
+    
+abecedario:
+    mov [caracter], eax ; Guardamos temporalmente eax en caracter
+    mov ecx, caracter
+    mov edx, 1
+    mov ebx, 1
+    mov eax, 4
+    int 0x80
+    
+    mov eax, [caracter] ; eax recupera su valor 
+    
+    inc eax ; Incrementamos el valor de eax 
+    
+    cmp eax, 'z' ; Comparamos si eax es igual a 'z'
+    jbe abecedario ; Saltamos a abecedario si eax es menoro o igual a 'z'
+    
+fin:
+    mov eax, 1
+    int 0x80
+
+section	.data
+caracter db 0

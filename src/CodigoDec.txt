@@ -1,0 +1,24 @@
+section	.text
+	global _start
+	
+_start:            
+    mov eax, '9' ; Inicializamos eax en '9'
+    
+imprimir:
+    mov [numero], eax ; Guardamos el contenido de eax para transferirlo a ecx
+    mov ecx, numero
+    mov ebx, 1
+    mov edx, 1
+    mov eax, 4
+    int 0x80
+    mov eax, [numero] ; eax recupera su valor real
+    dec eax ; decrementamos el valor de eax
+    cmp eax, 30h ; comparamos si eax es igual a '0'
+    jae imprimir ; saltamos a imprimir si eax es mayor o igual a '0'
+
+fin:
+    mov eax, 1
+    int 0x80
+
+section	.data
+    numero db 0
